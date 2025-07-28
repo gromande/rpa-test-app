@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome - Flask App{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h1 style="color: #333; margin-bottom: 20px;">Welcome to the Application!</h1>
+    <p style="font-size: 18px; color: #666; margin-bottom: 15px;">
+        Hello, <strong>{{ username }}</strong>! You have successfully logged into the system.
+    </p>
+    <p style="color: #888;">
+        Use the navigation bar above to access your profile or view user reports.
+    </p>
+</div>
+
+<div class="card">
+    <h3 style="color: #333; margin-bottom: 15px;">Quick Navigation</h3>
+    <div style="display: flex; gap: 15px;">
+        <a href="{{ url_for('profile') }}" style="text-decoration: none;">
+            <button>View Profile</button>
+        </a>
+        <a href="{{ url_for('reports') }}" style="text-decoration: none;">
+            <button>User Reports</button>
+        </a>
+    </div>
+</div>
+{% endblock %}

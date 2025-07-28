@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Login - Flask App{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width: 400px; margin: 50px auto;">
+    <h2 style="text-align: center; margin-bottom: 30px;">Login</h2>
+    
+    <form method="POST">
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        
+        <button type="submit" style="width: 100%;">Login</button>
+    </form>
+    
+    <div style="margin-top: 20px; padding: 15px; background-color: #e9f4ff; border-radius: 4px;">
+        <p style="margin: 0; font-size: 14px; color: #0066cc;">
+            <strong>Test Credentials:</strong><br>
+            Username: Admin<br>
+            Password: Admin123
+        </p>
+    </div>
+</div>
+{% endblock %}

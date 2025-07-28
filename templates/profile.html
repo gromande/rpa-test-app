@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Profile - Flask App{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2 style="color: #333; margin-bottom: 30px;">User Profile</h2>
+    
+    {% if user %}
+    <div style="background-color: #f8f9fa; padding: 20px; border-radius: 5px; border-left: 4px solid #007bff;">
+        <div style="display: grid; grid-template-columns: 150px 1fr; gap: 15px; align-items: center;">
+            <strong>Username:</strong>
+            <span>{{ user.username }}</span>
+            
+            <strong>First Name:</strong>
+            <span>{{ user.first_name }}</span>
+            
+            <strong>Last Name:</strong>
+            <span>{{ user.last_name }}</span>
+            
+            <strong>Role:</strong>
+            <span style="background-color: #007bff; color: white; padding: 4px 8px; border-radius: 3px; font-size: 12px;">
+                {{ user.role }}
+            </span>
+        </div>
+    </div>
+    {% else %}
+    <div class="alert">
+        User information not found.
+    </div>
+    {% endif %}
+</div>
+
+<div class="card">
+    <h3 style="color: #333; margin-bottom: 15px;">Account Information</h3>
+    <p style="color: #666;">
+        This profile page displays your current account information. 
+        You are currently logged in as <strong>{{ session.username }}</strong>.
+    </p>
+    <p style="color: #888; font-size: 14px;">
+        Last login: Active session
+    </p>
+</div>
+{% endblock %}

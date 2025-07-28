@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Reports - Flask App{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2 style="color: #333; margin-bottom: 20px;">User Reports</h2>
+    <p style="color: #666; margin-bottom: 30px;">
+        This report displays information about all users that have access to the application.
+    </p>
+    
+    <div style="overflow-x: auto;">
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>User Role</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.first_name }}</td>
+                    <td>{{ user.last_name }}</td>
+                    <td>
+                        <span style="background-color: 
+                            {% if user.role == 'Administrator' %}#dc3545{% elif user.role == 'Manager' %}#fd7e14{% elif user.role == 'Supervisor' %}#6f42c1{% else %}#28a745{% endif %}; 
+                            color: white; padding: 4px 8px; border-radius: 3px; font-size: 12px;">
+                            {{ user.role }}
+                        </span>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="card">
+    <h3 style="color: #333; margin-bottom: 15px;">Report Summary</h3>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+        <div style="text-align: center; padding: 15px; background-color: #f8f9fa; border-radius: 5px;">
+            <h4 style="margin: 0; color: #007bff;">{{ users|length }}</h4>
+            <p style="margin: 5px 0 0 0; color: #666;">Total Users</p>
+        </div>
+        <div style="text-align: center; padding: 15px; background-color: #f8f9fa; border-radius: 5px;">
+            <h4 style="margin: 0; color: #28a745;">{{ users|selectattr('role', 'equalto', 'Administrator')|list|length }}</h4>
+            <p style="margin: 5px 0 0 0; color: #666;">Administrators</p>
+        </div>
+        <div style="text-align: center; padding: 15px; background-color: #f8f9fa; border-radius: 5px;">
+            <h4 style="margin: 0; color: #fd7e14;">{{ users|selectattr('role', 'equalto', 'Manager')|list|length }}</h4>
+            <p style="margin: 5px 0 0 0; color: #666;">Managers</p>
+        </div>
+        <div style="text-align: center; padding: 15px; background-color: #f8f9fa; border-radius: 5px;">
+            <h4 style="margin: 0; color: #6c757d;">{{ users|selectattr('role', 'equalto', 'Employee')|list|length }}</h4>
+            <p style="margin: 5px 0 0 0; color: #666;">Employees</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
