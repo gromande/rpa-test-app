@@ -4,10 +4,20 @@
 
 {% block content %}
 <div class="card">
-    <h2 style="color: #333; margin-bottom: 20px;">User Reports</h2>
-    <p style="color: #666; margin-bottom: 30px;">
-        This report displays information about all users that have access to the application.
-    </p>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <div>
+            <h2 style="color: #333; margin: 0;">User Reports</h2>
+            <p style="color: #666; margin: 5px 0 0 0;">
+                This report displays information about all users that have access to the application.
+            </p>
+        </div>
+        <a href="{{ url_for('download_users_csv') }}" style="text-decoration: none;">
+            <button style="background-color: #28a745; display: flex; align-items: center; gap: 8px;">
+                <span>📥</span>
+                Download CSV
+            </button>
+        </a>
+    </div>
     
     <div style="overflow-x: auto;">
         <table>

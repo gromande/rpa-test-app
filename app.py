@@ -1,5 +1,7 @@
-from flask import Flask, render_template, request, redirect, url_for, session, flash
+from flask import Flask, render_template, request, redirect, url_for, session, flash, make_response
 import os
+import csv
+from io import StringIO
 
 app = Flask(__name__)
 app.secret_key = 'your-secret-key-here'
@@ -57,6 +59,29 @@ def reports():
         return redirect(url_for('login'))
     
     return render_template('reports.html', users=USERS_DATA)
+
+@app.route('/download_users_csv')
+def download_users_csv():
+    if 'username' not in session:
+        return redirect(url_for('login'))
+    
+    # Create CSV content
+    output = StringIO()
+    writer = csv.writer(output)
+    
+    # Write header
+    writer.writerow(['Username', 'First Name', 'Last Name', 'User Role'])
+    
+    # Write data rows
+    for user in USERS_DATA:
+        writer.writerow([user['username'], user['first_name'], user['last_name'], user['role']])
+    
+    # Create response
+    response = make_response(output.getvalue())
+    response.headers['Content-Type'] = 'text/csv'
+    response.headers['Content-Disposition'] = 'attachment; filename=users_report.csv'
+    
+    return response
 
 if __name__ == '__main__':
     app.run(debug=True)
